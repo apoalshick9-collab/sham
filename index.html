@@ -163,11 +163,10 @@
         </p>
     </footer>
 
-    <script type="module">
+  <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-  import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  import { getFirestore, collection, addDoc, getDocs, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-  // نفس الكونفيج تبعك خليه
   const firebaseConfig = {
     apiKey: "AIzaSyAyilyHxKFsCKDmX4i-7zPaiMXKP4c8m74",
     authDomain: "flutter-ai-playground-c3bb0.firebaseapp.com",
@@ -180,36 +179,38 @@
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
-  // هاد الجزء الناقص عندك - تبع ارسال الطلب
-  const orderForm = document.getElementById('orderForm');
-  const successMsg = document.getElementById('successMsg');
+  // هاد بيجيب الباقات
+  const packageSelect = document.getElementById('package');
+  async function loadPackages() {
+    const querySnapshot = await getDocs(collection(db, "packages"));
+    packageSelect.innerHTML = '<option value="">اختر الباقة</option>';
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+      packageSelect.innerHTML += <option value="${data.name}">${data.name}</option>;
+    });
+  }
+  loadPackages();
 
+  // هاد بيرسل الطلب - نفس كودك اللي بالصورة
+  const orderForm = document.getElementById('orderForm');
   if (orderForm) {
     orderForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      
       const btn = orderForm.querySelector('button[type="submit"]');
       btn.disabled = true;
       btn.innerText = 'جاري الارسال...';
-      if(successMsg) successMsg.style.display = 'none';
-
-      const formData = {
-        city: orderForm.city.value,
-        package: orderForm.package.value,
-        name: orderForm.name?.value || '',
-        phone: orderForm.phone?.value || '',
-        createdAt: serverTimestamp(),
-        status: 'جديد'
-      };
-
       try {
-        await addDoc(collection(db, "orders"), formData);
-        if(successMsg) successMsg.style.display = 'block';
+        await addDoc(collection(db, "orders"), {
+          city: orderForm.city.value,
+          package: orderForm.package.value,
+          name: orderForm.name?.value || '',
+          phone: orderForm.phone?.value || '',
+          createdAt: serverTimestamp()
+        });
+        alert('تم ارسال طلبك');
         orderForm.reset();
-        console.log("تم الارسال:", formData);
       } catch (error) {
-        console.error("خطأ:", error);
-        alert('فشل الارسال: ' + error.message);
+        alert('خطأ: ' + error.message);
       } finally {
         btn.disabled = false;
         btn.innerText = 'ارسل طلبك';
