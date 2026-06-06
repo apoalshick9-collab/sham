@@ -164,94 +164,58 @@
     </footer>
 
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import { getFirestore, collection, getDocs, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-        // الكونفيج الجديد تبعك
-        const firebaseConfig = {
-            apiKey: "AIzaSyAyilyHxkFsCKDmX4i-7zPaiMxKP4c8m74",
-            authDomain: "flutter-ai-playground-c3bb0.firebaseapp.com",
-            projectId: "flutter-ai-playground-c3bb0",
-            storageBucket: "flutter-ai-playground-c3bb0.firebasestorage.app",
-            messagingSenderId: "1055759995979",
-            appId: "1:1055759995979:web:88dff3199c6c50f23769ce"
-        };
+  // نفس الكونفيج تبعك خليه
+  const firebaseConfig = {
+    apiKey: "AIzaSyAyilyHxKFsCKDmX4i-7zPaiMXKP4c8m74",
+    authDomain: "flutter-ai-playground-c3bb0.firebaseapp.com",
+    projectId: "flutter-ai-playground-c3bb0",
+    storageBucket: "flutter-ai-playground-c3bb0.firebasestorage.app",
+    messagingSenderId: "1055759995979",
+    appId: "1:1055759995979:web:88dff2199c6c50f23769ce"
+  };
 
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
 
-        let packages = [];
+  // هاد الجزء الناقص عندك - تبع ارسال الطلب
+  const orderForm = document.getElementById('orderForm');
+  const successMsg = document.getElementById('successMsg');
 
-        async function loadPackages() {
-            try {
-                const querySnapshot = await getDocs(collection(db, "packages"));
-                const container = document.getElementById('pricingContainer');
-                const select = document.getElementById('selectedPackage');
-                container.innerHTML = '';
-                select.innerHTML = '<option value="">اختر باقتك</option>';
-                packages = [];
-                
-                if (querySnapshot.empty) {
-                    container.innerHTML = '<p class="loading-msg">لا توجد باقات حالياً. ضيف باقات من لوحة التحكم</p>';
-                    return;
-                }
+  if (orderForm) {
+    orderForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const btn = orderForm.querySelector('button[type="submit"]');
+      btn.disabled = true;
+      btn.innerText = 'جاري الارسال...';
+      if(successMsg) successMsg.style.display = 'none';
 
-                querySnapshot.forEach((doc) => {
-                    const pkg = { id: doc.id, ...doc.data() };
-                    packages.push(pkg);
-                    
-                    container.innerHTML += `
-                        <div class="price-card ${pkg.featured ? 'featured' : ''}">
-                            <h3>${pkg.name}</h3>
-                            <div class="price">$${pkg.price}<span>/شهر</span></div>
-                            <ul class="price-features">
-                                <li><i class="fa-solid fa-check"></i> سرعة ${pkg.speed} Mbps</li>
-                                ${pkg.features && Array.isArray(pkg.features) ? pkg.features.map(f => `<li><i class="fa-solid fa-check"></i> ${f}</li>`).join('') : ''}
-                            </ul>
-                        </div>
-                    `;
+      const formData = {
+        city: orderForm.city.value,
+        package: orderForm.package.value,
+        name: orderForm.name?.value || '',
+        phone: orderForm.phone?.value || '',
+        createdAt: serverTimestamp(),
+        status: 'جديد'
+      };
 
-                    select.innerHTML += `<option value="${pkg.id}">${pkg.name} - ${pkg.speed} Mbps - $${pkg.price}</option>`;
-                });
-            } catch (error) {
-                console.error("Error loading packages: ", error);
-                document.getElementById('pricingContainer').innerHTML = `<p class="error-msg">خطأ بتحميل الباقات: ${error.message}<br>تأكد من قواعد Firestore</p>`;
-            }
-        }document.getElementById('orderForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const msg = document.getElementById('orderMsg');
-            msg.textContent = 'جاري إرسال طلبك...';
-            msg.style.color = 'var(--space-blue)';
-            
-            const selectedPkg = packages.find(p => p.id === document.getElementById('selectedPackage').value);
-            if (!selectedPkg) {
-                msg.textContent = '❌ اختر باقة أول';
-                msg.style.color = '#FF2E63';
-                return;
-            }
-            
-            try {
-                await addDoc(collection(db, "orders"), {
-                    name: document.getElementById('customerName').value,
-                    phone: document.getElementById('customerPhone').value,
-                    city: document.getElementById('customerCity').value,
-                    packageName: selectedPkg.name,
-                    packageSpeed: selectedPkg.speed,
-                    packagePrice: selectedPkg.price,
-                    status: 'جديد',
-                    createdAt: serverTimestamp()
-                });
-                msg.textContent = '✅ تم استلام طلبك! رح نتواصل معك خلال 24 ساعة';
-                msg.style.color = 'var(--space-blue)';
-                document.getElementById('orderForm').reset();
-            } catch (error) {
-                console.error("Error adding order: ", error);
-                msg.textContent = '❌ صار خطأ، جرب مرة تانية';
-                msg.style.color = '#FF2E63';
-            }
-        });
-
-        loadPackages();
-    </script>
+      try {
+        await addDoc(collection(db, "orders"), formData);
+        if(successMsg) successMsg.style.display = 'block';
+        orderForm.reset();
+        console.log("تم الارسال:", formData);
+      } catch (error) {
+        console.error("خطأ:", error);
+        alert('فشل الارسال: ' + error.message);
+      } finally {
+        btn.disabled = false;
+        btn.innerText = 'ارسل طلبك';
+      }
+    });
+  }
+</script>
 </body>
 </html>
