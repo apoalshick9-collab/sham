@@ -163,7 +163,7 @@
         </p>
     </footer>
 
-  <script type="module">
+ <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
   import { getFirestore, collection, addDoc, getDocs, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
@@ -179,19 +179,84 @@
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
-  // هاد بيجيب الباقات
-  const packageSelect = document.getElementById('package');
-  async function loadPackages() {
-    const querySnapshot = await getDocs(collection(db, "packages"));
-    packageSelect.innerHTML = '<option value="">اختر الباقة</option>';
-    querySnapshot.forEach((doc) => {
-      const data = doc.data();
-      packageSelect.innerHTML += <option value="${data.name}">${data.name}</option>;
-    });
+  // 1. عرض الباقات كبطاقات بصفحة "باقاتنا للبيوت" - حطه هون
+  const packagesList = document.getElementById('packagesList');
+  async function displayPackages() {
+    if (!packagesList) return;
+    packagesList.innerHTML = 'جاري تحميل الباقات...';
+    try {
+      const querySnapshot = await getDocs(collection(db, "packages"));
+      if (querySnapshot.empty) {
+        packagesList.innerHTML = 'لا توجد باقات حالياً';
+        return;
+      }
+      packagesList.innerHTML = '';
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        packagesList.innerHTML += 
+          <div class="package-card">
+            <h3>${data.name}</h3>
+            <p>السعر: ${data.price} ل.س</p>
+            <p>السرعة: ${data.speed || ''}</p>
+            <button onclick="location.href='#orderForm'">اطلب الآن</button>
+          </div>
+        ;
+      });
+    } catch (error) {
+      console.error("خطأ:", error);
+      packagesList.innerHTML = 'فشل تحميل الباقات';
+    }
   }
-  loadPackages();
+  displayPackages();
 
-  // هاد بيرسل الطلب - نفس كودك اللي بالصورة
+  // 2. تعبئة الباقات بقلب <select> الفورم
+  const packageSelect = document.getElementById('package');
+  async function loadPackagesToSelect() {
+    if (!packageSelect) return;
+    try {
+      const querySnapshot = await getDocs(collection(db, "packages"));
+      packageSelect.innerHTML = '<option value="">اختر الباقة</option>';
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        packageSelect.innerHTML += <option value="${data.name}">${data.name}</option>;
+      });
+    } catch (error) {
+      console.error("خطأ تحميل الباقات للفورم:", error);
+    }
+  }
+     const db = getFirestore(app);
+
+  // 1. عرض الباقات كبطاقات - حطه هون اول شي 👇
+  const packagesList = document.getElementById('packagesList');
+  async function displayPackages() {
+    if (!packagesList) return;
+    packagesList.innerHTML = 'جاري تحميل الباقات...';
+    try {
+      const querySnapshot = await getDocs(collection(db, "packages"));
+      if (querySnapshot.empty) {
+        packagesList.innerHTML = 'لا توجد باقات حالياً';
+        return;
+      }
+      packagesList.innerHTML = '';
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        packagesList.innerHTML += 
+          <div class="package-card">
+            <h3>${data.name}</h3>
+            <p>السعر: ${data.price} ل.س</p>
+            <button onclick="location.href='#orderForm'">اطلب الآن</button>
+          </div>
+        ;
+      });
+    } catch (error) {
+      console.error("خطأ:", error);
+      packagesList.innerHTML = 'فشل تحميل الباقات';
+    }
+  }
+  displayPackages();
+  loadPackagesToSelect();
+
+  // 3. ارسال الطلب
   const orderForm = document.getElementById('orderForm');
   if (orderForm) {
     orderForm.addEventListener('submit', async (e) => {
@@ -218,5 +283,6 @@
     });
   }
 </script>
+    
 </body>
 </html>
