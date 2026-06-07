@@ -1,268 +1,203 @@
-       <!DOCTYPE html>
+    
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>شام نت - باقاتنا للبيوت</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { 
-      font-family: 'Segoe UI', Tahoma, sans-serif; 
-      background: linear-gradient(180deg, #0a1929 0%, #1a3a5f 100%); 
-      color: white; 
-      min-height: 100vh;
-    }
-    .navbar {
-      background: rgba(0,0,0,0.3);
-      backdrop-filter: blur(10px);
-      padding: 15px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-    .nav-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-    }
-    .nav-content a {
-      color: white;
-      text-decoration: none;
-      font-size: 16px;
-      transition: 0.3s;
-    }
-    .nav-content a:hover { color: #00d4ff; }
-    .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
-    .main-title {
-      text-align: center;
-      font-size: 42px;
-      margin-bottom: 20px;
-      font-weight: bold;
-    }
-    .main-title span { color: #00d4ff; }
-    .loading-text {
-      text-align: center;
-      color: rgba(255,255,255,0.7);
-      margin-bottom: 60px;
-      font-size: 16px;
-    }
-    .packages-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 25px;
-      margin-bottom: 80px;
-    }
-    .package-card {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 15px;
-      padding: 25px;
-      backdrop-filter: blur(10px);
-      transition: 0.3s;
-    }
-    .package-card:hover {
-      transform: translateY(-5px);
-      border-color: #00d4ff;
-      box-shadow: 0 10px 30px rgba(0,212,255,0.2);
-    }
-    .package-card h3 {
-      font-size: 22px;
-      margin-bottom: 15px;
-      color: #00d4ff;
-    }
-    .package-info {
-      margin: 12px 0;
-      color: rgba(255,255,255,0.8);
-    }
-    .package-info i { margin-left: 8px; color: #00d4ff; }
-    .package-price {
-      font-size: 32px;
-      font-weight: bold;
-      color: #00d4ff;
-      margin: 20px 0 10px;
-    }
-    .section-title-2 {
-      text-align: center;
-      font-size: 36px;
-      margin-bottom: 30px;
-      font-weight: bold;
-    }
-    .section-title-2 span { color: #00d4ff; }
-    .form-card {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 20px;
-      padding: 35px;
-      max-width: 600px;
-      margin: 0 auto;
-      backdrop-filter: blur(10px);
-    }
-    .form-group { margin-bottom: 20px; }
-    .form-group label {
-      display: block;
-      margin-bottom: 8px;
-      color: rgba(255,255,255,0.9);
-      font-size: 15px;
-    }
-    .form-group input, .form-group select {
-      width: 100%;
-      padding: 14px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 10px;
-      color: white;
-      font-size: 15px;
-    }
-    .form-group input::placeholder { color: rgba(255,255,255,0.4); }
-    .form-group input:focus, .form-group select:focus {
-      outline: none;
-      border-color: #00d4ff;
-      background: rgba(255,255,255,0.12);
-    }
-    .btn-submit {
-      width: 100%;
-      padding: 16px;
-      background: linear-gradient(135deg, #00d4ff, #0099cc);
-      border: none;
-      border-radius: 10px;
-      color: white;
-      font-size: 18px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    .btn-submit:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(0,212,255,0.4);
-    }
-    #status { margin-top: 15px; text-align: center; font-weight: bold; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شام نت - إنترنت فضائي بسرعة الضوء</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;800;900&family=Tajawal:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --space-dark: #0B0E23; --space-blue: #00D9FF; --space-purple: #7B2FFF;
+            --space-pink: #FF2E63; --text-main: #FFFFFF; --text-secondary: #B8C5D6;
+            --card-bg: rgba(255, 255, 255, 0.05);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "Cairo", sans-serif; background: var(--space-dark); color: var(--text-main); overflow-x: hidden; }
+        .stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%); }
+        nav { position: fixed; top: 0; width: 100%; padding: 20px 5%; background: rgba(11, 14, 35, 0.8); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0, 217, 255, 0.2); z-index: 1000; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: "Tajawal", sans-serif; font-size: 28px; font-weight: 900; background: linear-gradient(45deg, var(--space-blue), var(--space-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { color: var(--text-main); text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .nav-links a:hover { color: var(--space-blue); }
+        .btn { padding: 12px 30px; border-radius: 50px; font-weight: 700; text-decoration: none; transition: 0.3s; border: none; cursor: pointer; display: inline-block; }
+        .btn-primary { background: linear-gradient(45deg, var(--space-blue), var(--space-purple)); color: white; }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0, 217, 255, 0.4); }
+        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 120px 5% 60px; position: relative; z-index: 1; }
+        .hero-content { max-width: 900px; }
+        .hero h1 { font-family: "Tajawal", sans-serif; font-size: 64px; font-weight: 900; margin-bottom: 20px; line-height: 1.2; }
+        .hero h1 span { background: linear-gradient(45deg, var(--space-blue), var(--space-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { font-size: 22px; color: var(--text-secondary); margin-bottom: 40px; line-height: 1.8; }
+        .hero-buttons { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+        .btn-outline { border: 2px solid var(--space-blue); color: var(--space-blue); background: transparent; }
+        .btn-outline:hover { background: var(--space-blue); color: var(--space-dark); }
+        .section { padding: 100px 5%; position: relative; z-index: 1; }
+        .section-title { text-align: center; font-family: "Tajawal", sans-serif; font-size: 48px; font-weight: 900; margin-bottom: 60px; }
+        .pricing { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
+        .price-card { background: var(--card-bg); border: 1px solid rgba(123, 47, 255, 0.3); border-radius: 20px; padding: 50px 40px; text-align: center; backdrop-filter: blur(10px); position: relative; transition: 0.3s; }
+        .price-card.featured { border: 2px solid var(--space-blue); transform: scale(1.05); }
+        .price-card.featured::before { content: "الأكثر طلباً"; position: absolute; top: -15px; right: 50%; transform: translateX(50%); background: linear-gradient(45deg, var(--space-blue), var(--space-purple)); padding: 5px 20px; border-radius: 20px; font-size: 14px; font-weight: 700; }
+        .price-card h3 { font-size: 28px; margin-bottom: 10px; }
+        .price { font-size: 56px; font-weight: 900; margin: 20px 0; background: linear-gradient(45deg, var(--space-blue), var(--space-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .price span { font-size: 18px; color: var(--text-secondary); }
+        .price-features { list-style: none; margin: 30px 0; text-align: right; }
+        .price-features li { padding: 12px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); color: var(--text-secondary); }
+        .price-features li i { color: var(--space-blue); margin-left: 10px; }
+        .order-form { max-width: 600px; margin: 60px auto 0; background: var(--card-bg); border: 1px solid rgba(0, 217, 255, 0.3); border-radius: 20px; padding: 40px; backdrop-filter: blur(10px); }
+        .form-group { margin-bottom: 20px; text-align: right; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--text-main); }
+        .form-group input, .form-group select { width: 100%; padding: 15px; border-radius: 10px; border: 1px solid rgba(0, 217, 255, 0.3); background: rgba(0, 0, 0, 0.3); color: var(--text-main); font-family: "Cairo"; font-size: 16px; }
+        .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--space-blue); }
+        footer { background: rgba(0, 0, 0, 0.5); border-top: 1px solid rgba(0, 217, 255, 0.2); padding: 60px 5% 30px; text-align: center; position: relative; z-index: 1; }
+        .loading-msg { text-align: center; color: var(--text-secondary); grid-column: 1 / -1; }
+        .error-msg { text-align: center; color: #FF2E63; grid-column: 1 / -1; }
+        @media (max-width: 768px) { .hero h1 { font-size: 40px; } .hero p { font-size: 18px; } .nav-links { display: none; } .price-card.featured { transform: scale(1); } }
+    </style>
 </head>
 <body>
-  <nav class="navbar">
-    <div class="nav-content">
-      <a href="#home">الرئيسية</a>
-      <a href="#features">المميزات</a>
-      <a href="#packages">الباقات</a>
-      <a href="#order">اطلب الآن</a>
-    </div>
-  </nav>
+    <div class="stars"></div>
+    <nav>
+        <div class="logo"><i class="fa-solid fa-satellite-dish"></i> شام نت</div>
+        <div class="nav-links">
+            <a href="#home">الرئيسية</a>
+            <a href="#pricing">الباقات</a>
+            <a href="#order">اطلب الآن</a>
+        </div>
+        <a href="#order" class="btn btn-primary">اشترك الآن</a>
+    </nav>
 
-  <div class="container">
-    <h1 class="main-title"><span>باقاتنا</span> للبيوت</h1>
-    <p class="loading-text" id="loadingText">جاري تحميل الباقات...</p>
-    
-    <div id="packagesList" class="packages-grid"></div>
-
-    <h2 class="section-title-2" id="order"><span>اطلب</span> اشتراكك</h2>
-    
-    <div class="form-card">
-      <div class="form-group">
-        <label>الاسم الكامل</label>
-        <input type="text" id="fullName" placeholder="محمد احمد">
-      </div>
-      <div class="form-group">
-        <label>رقم الهاتف</label>
-        <input type="tel" id="phone" placeholder="09xxxxxxxx">
-      </div>
-      <div class="form-group">
-        <label>اختر الباقة</label>
-        <select id="packageSelect">
-          <option value="">-- اختر باقة --</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>العنوان</label>
-        <input type="text" id="address" placeholder="المدينة - الحي">
-      </div>
-      <button class="btn-submit" id="submitBtn">إرسال الطلب</button>
-      <p id="status"></p>
-    </div>
-  </div>
-
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getFirestore, collection, getDocs, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyAyilyHxKFsCKDmX4i-7zPaiMXKP4c8m74",
-      authDomain: "flutter-ai-playground-c3bb0.firebaseapp.com",
-      projectId: "flutter-ai-playground-c3bb0",
-      storageBucket: "flutter-ai-playground-c3bb0.firebasestorage.app",
-      messagingSenderId: "1055759995979",
-      appId: "1:1055759995979:web:88dff2199c6c50f23769ce"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    const packagesList = document.getElementById('packagesList');
-    const packageSelect = document.getElementById('packageSelect');
-    const loadingText = document.getElementById('loadingText');
-
-    async function loadPackages() {
-      try {
-        const querySnapshot = await getDocs(collection(db, "packages"));
-        if (querySnapshot.empty) {
-          loadingText.textContent = 'لا توجد باقات متاحة حالياً';
-          return;
-        }
-        loadingText.style.display = 'none';
-        let html = '';
-        let options = '<option value="">-- اختر باقة --</option>';
-        querySnapshot.forEach((doc) => {
-          const p = doc.data();
-          html += `
-            <div class="package-card">
-              <h3>${p.name}</h3>
-              <div class="package-info"><i class="fas fa-tachometer-alt"></i> السرعة: ${p.speed} Mbps</div>
-              <div class="package-info"><i class="fas fa-calendar-alt"></i> المدة: ${p.duration}</div>
-              <div class="package-info"><i class="fas fa-info-circle"></i> ${p.description || 'انترنت سريع'}</div>
-              <div class="package-price">${p.price} ل.س</div>
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>إنترنت فضائي <span>بسرعة الضوء</span><br>من الفضاء لبيتك مباشرة</h1>
+            <p>مع شام نت، ودّع الانقطاعات وبطء النت. تقنية الأقمار الصناعية منخفضة المدار تغطي سوريا كاملة بسرعات تصل لـ 250 ميجا</p>
+            <div class="hero-buttons">
+                <a href="#order" class="btn btn-primary">اطلب اشتراك <i class="fa-solid fa-arrow-down"></i></a>
+                <a href="#pricing" class="btn btn-outline">شوف الباقات</a>
             </div>
-          `;
-          options += `<option value="${doc.id}">${p.name} - ${p.price} ل.س</option>`;
+        </div>
+    </section>
+
+    <section class="section" id="pricing">
+        <h2 class="section-title">باقاتنا <span style="color: var(--space-blue)">للبيوت</span></h2>
+        <div class="pricing" id="pricingContainer">
+            <p class="loading-msg">جاري تحميل الباقات...</p>
+        </div>
+    </section>
+
+    <section class="section" id="order">
+        <h2 class="section-title">اطلب <span style="color: var(--space-blue)">اشتراكك</span></h2>
+        <div class="order-form">
+            <form id="orderForm">
+                <div class="form-group">
+                    <label>الاسم الكامل</label>
+                    <input type="text" id="customerName" required placeholder="محمد أحمد">
+                </div>
+                <div class="form-group">
+                    <label>رقم الموبايل</label>
+                    <input type="tel" id="customerPhone" required placeholder="0999123456">
+                </div>
+                <div class="form-group">
+                    <label>المحافظة</label>
+                    <input type="text" id="customerCity" required placeholder="دمشق">
+                </div>
+                <div class="form-group">
+                    <label>اختر الباقة</label>
+                    <select id="selectedPackage" required>
+                        <option value="">جاري تحميل الباقات...</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">إرسال الطلب <i class="fa-solid fa-paper-plane"></i></button>
+            </form>
+            <p id="orderMsg" style="text-align: center; margin-top: 20px; color: var(--space-blue);"></p>
+        </div>
+    </section>
+
+    <footer>
+        <p style="color: var(--text-secondary);">© 2026 شام نت. جميع الحقوق محفوظة.</p>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getFirestore, collection, getDocs, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAg0LGjb6rcMlMZUn15R73_pX2VXBOp0Xc",
+            authDomain: "syriastore1-dcee8.firebaseapp.com",
+            projectId: "syriastore1-dcee8",
+            storageBucket: "syriastore1-dcee8.firebasestorage.app",
+            messagingSenderId: "938774399039",
+            appId: "1:938774399039:web:72d8b51051043b69a6d08a"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        let packages = [];
+
+        async function loadPackages() {
+            try {
+                const querySnapshot = await getDocs(collection(db, "packages"));
+                const container = document.getElementById('pricingContainer');
+                const select = document.getElementById('selectedPackage');
+                container.innerHTML = '';
+                select.innerHTML = '<option value="">اختر باقتك</option>';
+                packages = [];
+                
+                if (querySnapshot.empty) {
+                    container.innerHTML = '<p class="loading-msg">لا توجد باقات حالياً. ضيف باقات من لوحة التحكم</p>';
+                    return;
+                }
+
+                querySnapshot.forEach((doc) => {
+                    const pkg = { id: doc.id, ...doc.data() };
+                    packages.push(pkg);
+                    container.innerHTML += `
+                        <div class="price-card ${pkg.featured ? 'featured' : ''}">
+                            <h3>${pkg.name}</h3>
+                            <div class="price">$${pkg.price}<span>/شهر</span></div>
+                            <ul class="price-features">
+                                <li><i class="fa-solid fa-check"></i> سرعة ${pkg.speed} Mbps</li>
+                                ${pkg.features && Array.isArray(pkg.features) ? pkg.features.map(f => `<li><i class="fa-solid fa-check"></i> ${f}</li>`).join('') : ''}
+                            </ul>
+                        </div>
+                    `;
+                    select.innerHTML += `<option value="${pkg.id}">${pkg.name} - ${pkg.speed} Mbps - $${pkg.price}</option>`;
+                });
+            } catch (error) {
+                document.getElementById('pricingContainer').innerHTML = `<p class="error-msg">خطأ بتحميل الباقات: ${error.message}</p>`;
+            }
+        }
+
+        document.getElementById('orderForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const msg = document.getElementById('orderMsg');
+            msg.textContent = 'جاري إرسال طلبك...';
+            const selectedPkg = packages.find(p => p.id === document.getElementById('selectedPackage').value);
+            if (!selectedPkg) {
+                msg.textContent = '❌ اختر باقة أول';
+                msg.style.color = '#FF2E63';
+                return;
+            }
+            try {
+                await addDoc(collection(db, "orders"), {
+                    name: document.getElementById('customerName').value,
+                    phone: document.getElementById('customerPhone').value,
+                    city: document.getElementById('customerCity').value,
+                    packageName: selectedPkg.name,
+                    packageSpeed: selectedPkg.speed,
+                    packagePrice: selectedPkg.price,
+                    status: 'جديد',
+                    createdAt: serverTimestamp()
+                });
+                msg.textContent = '✅ تم استلام طلبك! رح نتواصل معك خلال 24 ساعة';
+                msg.style.color = 'var(--space-blue)';
+                document.getElementById('orderForm').reset();
+            } catch (error) {
+                msg.textContent = '❌ صار خطأ، جرب مرة تانية';
+                msg.style.color = '#FF2E63';
+            }
         });
-        packagesList.innerHTML = html;
-        packageSelect.innerHTML = options;
-      } catch (error) {
-        loadingText.textContent = 'خطأ: ' + error.message;
-      }
-    }
-
-    document.getElementById('submitBtn').onclick = async () => {
-      const status = document.getElementById('status');
-      const fullName = document.getElementById('fullName').value;
-      const phone = document.getElementById('phone').value;
-      const packageId = document.getElementById('packageSelect').value;
-      const address = document.getElementById('address').value;
-      
-      if (!fullName || !phone || !packageId) {
-        status.textContent = 'عبي كل الحقول المطلوبة';
-        status.style.color = '#ff6b6b';
-        return;
-      }
-
-      try {
-        await addDoc(collection(db, "orders"), {
-          fullName, phone, packageId, address,
-          createdAt: serverTimestamp(),
-          status: 'جديد'
-        });
-        status.textContent = 'تم إرسال طلبك بنجاح! رح نتواصل معك قريباً';
-        status.style.color = '#00d4ff';
-        document.getElementById('fullName').value = '';
-        document.getElementById('phone').value = '';
-        document.getElementById('packageSelect').value = '';
-        document.getElementById('address').value = '';
-      } catch (e) {
-        status.textContent = 'خطأ: ' + e.message;
-        status.style.color = '#ff6b6b';
-      }
-    };
-
-    loadPackages();
-  </script>
+        loadPackages();
+    </script>
 </body>
-</html>   
+</html>
