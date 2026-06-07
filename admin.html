@@ -13,42 +13,40 @@
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: "Cairo", sans-serif; background: var(--space-dark); color: var(--text-main); }
-        .stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%); }
+       .stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%); }
         nav { position: fixed; top: 0; width: 100%; padding: 20px 5%; background: rgba(11, 14, 35, 0.8); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0, 217, 255, 0.2); z-index: 1000; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 24px; font-weight: 900; background: linear-gradient(45deg, var(--space-blue), var(--space-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .container { max-width: 1400px; margin: 120px auto 40px; padding: 0 5%; position: relative; z-index: 1; }
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px; }
-        .stat-card { background: var(--card-bg); border: 1px solid rgba(0, 217, 255, 0.2); border-radius: 15px; padding: 25px; backdrop-filter: blur(10px); }
-        .stat-card h3 { color: var(--space-blue); font-size: 14px; margin-bottom: 10px; }
-        .stat-card p { font-size: 32px; font-weight: 900; }
-        .card { background: var(--card-bg); border: 1px solid rgba(0, 217, 255, 0.2); border-radius: 20px; padding: 40px; margin-bottom: 30px; backdrop-filter: blur(10px); }
-        .card h2 { color: var(--space-blue); margin-bottom: 25px; font-size: 28px; }
-        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-        .form-group { margin-bottom: 20px; text-align: right; }
-        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; }
-        .form-group input,.form-group textarea,.form-group select { width: 100%; padding: 15px; border-radius: 10px; border: 1px solid rgba(0, 217, 255, 0.3); background: rgba(0, 0, 0, 0.3); color: var(--text-main); font-family: "Cairo"; font-size: 16px; }
-        .form-group input:focus,.form-group textarea:focus,.form-group select:focus { outline: none; border-color: var(--space-blue); }
-        .btn { padding: 12px 25px; border-radius: 50px; font-weight: 700; border: none; cursor: pointer; transition: 0.3s; }
-        .btn-primary { background: linear-gradient(45deg, var(--space-blue), var(--space-purple)); color: white; }
-        .btn-danger { background: #FF2E63; color: white; padding: 8px 15px; font-size: 14px; }
-        .btn-warning { background: #ffa000; color: white; padding: 8px 15px; font-size: 14px; margin-left: 8px; }
-        .btn-success { background: #00ff88; color: #0B0E23; padding: 8px 15px; font-size: 14px; margin-left: 8px; }
+       .logo { font-size: 24px; font-weight: 900; background: linear-gradient(45deg, var(--space-blue), var(--space-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+       .container { max-width: 1400px; margin: 120px auto 40px; padding: 0 5%; position: relative; z-index: 1; }
+       .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px; }
+       .stat-card { background: var(--card-bg); border: 1px solid rgba(0, 217, 255, 0.2); border-radius: 15px; padding: 25px; backdrop-filter: blur(10px); }
+       .stat-card h3 { color: var(--space-blue); font-size: 14px; margin-bottom: 10px; }
+       .stat-card p { font-size: 32px; font-weight: 900; }
+       .card { background: var(--card-bg); border: 1px solid rgba(0, 217, 255, 0.2); border-radius: 20px; padding: 40px; margin-bottom: 30px; backdrop-filter: blur(10px); }
+       .card h2 { color: var(--space-blue); margin-bottom: 25px; font-size: 28px; }
+       .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+       .form-group { margin-bottom: 20px; text-align: right; }
+       .form-group label { display: block; margin-bottom: 8px; font-weight: 600; }
+       .form-group input,.form-group textarea,.form-group select { width: 100%; padding: 15px; border-radius: 10px; border: 1px solid rgba(0, 217, 255, 0.3); background: rgba(0, 0, 0, 0.3); color: var(--text-main); font-family: "Cairo"; font-size: 16px; }
+       .form-group input:focus,.form-group textarea:focus,.form-group select:focus { outline: none; border-color: var(--space-blue); }
+       .btn { padding: 12px 25px; border-radius: 50px; font-weight: 700; border: none; cursor: pointer; transition: 0.3s; }
+       .btn-primary { background: linear-gradient(45deg, var(--space-blue), var(--space-purple)); color: white; }
+       .btn-danger { background: #FF2E63; color: white; padding: 8px 15px; font-size: 14px; }
+       .btn-warning { background: #ffa000; color: white; padding: 8px 15px; font-size: 14px; margin-left: 8px; }
+       .btn-success { background: #00ff88; color: #0B0E23; padding: 8px 15px; font-size: 14px; margin-left: 8px; }
+       .btn-copy { background: rgba(0, 217, 255, 0.2); color: var(--space-blue); padding: 6px 12px; font-size: 12px; border: 1px solid var(--space-blue); }
+       .btn-copy:hover { background: var(--space-blue); color: #0B0E23; }
         table { width: 100%; border-collapse: collapse; margin-top: 20px; }
         th, td { padding: 15px; text-align: right; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
         th { color: var(--space-blue); font-weight: 700; }
         tr:hover { background: rgba(255, 255, 255, 0.03); }
-        .badge { padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; }
-        .badge-new { background: rgba(0, 217, 255, 0.2); color: var(--space-blue); }
-        .badge-processing { background: rgba(255, 160, 0, 0.2); color: #ffa000; }
-        .badge-done { background: rgba(0, 255, 136, 0.2); color: #00ff88; }
-        .badge-cancelled { background: rgba(255, 46, 99, 0.2); color: #FF2E63; }
-        .badge-paid { background: rgba(0, 255, 136, 0.2); color: #00ff88; }
-        .badge-pending { background: rgba(255, 160, 0, 0.2); color: #ffa000; }
-        .payment-img { width: 60px; height: 60px; object-fit: cover; border-radius: 8px; cursor: pointer; border: 2px solid var(--space-blue); }
-        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); align-items: center; justify-content: center; }
-        .modal.show { display: flex; }
-        .modal img { max-width: 90%; max-height: 90%; border-radius: 10px; }
-        .modal-close { position: absolute; top: 20px; right: 40px; font-size: 40px; color: white; cursor: pointer; }
+       .badge { padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+       .badge-new { background: rgba(0, 217, 255, 0.2); color: var(--space-blue); }
+       .badge-processing { background: rgba(255, 160, 0, 0.2); color: #ffa000; }
+       .badge-done { background: rgba(0, 255, 136, 0.2); color: #00ff88; }
+       .badge-cancelled { background: rgba(255, 46, 99, 0.2); color: #FF2E63; }
+       .badge-paid { background: rgba(0, 255, 136, 0.2); color: #00ff88; }
+       .badge-pending { background: rgba(255, 160, 0, 0.2); color: #ffa000; }
+       .payment-code { font-family: monospace; background: rgba(0, 217, 255, 0.1); padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(0, 217, 255, 0.3); display: inline-block; margin-left: 8px; }
         #status { margin-top: 15px; font-weight: bold; }
     </style>
 </head>
@@ -105,15 +103,10 @@
         <div class="card">
             <h2><i class="fa-solid fa-clipboard-list"></i> الطلبات</h2>
             <table>
-                <thead><tr><th>الاسم</th><th>الهاتف</th><th>المدينة</th><th>الباقة</th><th>الحالة</th><th>الدفع</th><th>الصورة</th><th>اجراءات</th></tr></thead>
+                <thead><tr><th>الاسم</th><th>الهاتف</th><th>المدينة</th><th>الباقة</th><th>الحالة</th><th>الدفع</th><th>كود التفعيل</th><th>اجراءات</th></tr></thead>
                 <tbody id="ordersTable"></tbody>
             </table>
         </div>
-    </div>
-
-    <div class="modal" id="imageModal">
-        <span class="modal-close" onclick="closeModal()">&times;</span>
-        <img id="modalImage" src="">
     </div>
 
     <script type="module">
@@ -132,6 +125,12 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         const status = document.getElementById('status');
+
+        window.copyCode = function(code) {
+            navigator.clipboard.writeText(code).then(() => {
+                alert('✅ تم نسخ كود التفعيل: ' + code);
+            });
+        }
 
         async function loadData() {
             const packagesSnap = await getDocs(collection(db, "packages"));
@@ -159,9 +158,11 @@
                 if (o.paymentStatus === 'تم الدفع') paidCount++;
                 if (o.status === 'تم التوصيل') deliveredCount++;
 
-                const date = o.createdAt? new Date(o.createdAt.seconds * 1000).toLocaleDateString('ar-SY') : '';
                 const statusClass = o.status === 'جديد'? 'badge-new' : o.status === 'قيد المعالجة'? 'badge-processing' : o.status === 'تم التوصيل'? 'badge-done' : 'badge-cancelled';
                 const paymentClass = o.paymentStatus === 'تم الدفع'? 'badge-paid' : 'badge-pending';
+                const paymentCodeDisplay = o.paymentCode && o.paymentCode !== 'غير مدخل' 
+                    ? `<span class="payment-code">${o.paymentCode}</span><button class="btn btn-copy" onclick="copyCode('${o.paymentCode}')"><i class="fa-solid fa-copy"></i> نسخ</button>` 
+                    : '<span style="color: #94a3b8;">-</span>';
 
                 ordersHtml += `<tr>
                     <td>${o.name}</td>
@@ -170,7 +171,7 @@
                     <td>${o.packageName}</td>
                     <td><span class="badge ${statusClass}">${o.status}</span></td>
                     <td><span class="badge ${paymentClass}">${o.paymentStatus || 'بانتظار الدفع'}</span></td>
-                    <td>${o.paymentProof? `<img src="${o.paymentProof}" class="payment-img" onclick="showImage('${o.paymentProof}')">` : '-'}</td>
+                    <td>${paymentCodeDisplay}</td>
                     <td>
                         <select onchange="updateOrderStatus('${docSnap.id}', this.value)" style="padding: 8px; border-radius: 8px; background: rgba(0,0,0,0.3); color: white; border: 1px solid rgba(0,217,255,0.3);">
                             <option value="جديد" ${o.status === 'جديد'? 'selected' : ''}>جديد</option>
@@ -192,50 +193,48 @@
             const features = document.getElementById('features').value.split('\n').filter(f => f.trim());
             const data = {
                 name: document.getElementById('name').value,
-                speed: document.getElementById('speed').value,
+                speed: Number(document.getElementById('speed').value),
                 price: Number(document.getElementById('price').value),
                 featured: document.getElementById('featured').value === 'true',
                 features: features
             };
-            const id = document.getElementById('editId').value;
-            try {
-                if (id) {
-                    await updateDoc(doc(db, "packages", id), data);
-                    status.textContent = '✅ تم التعديل';
-                } else {
-                    await addDoc(collection(db, "packages"), {...data, createdAt: serverTimestamp()});
-                    status.textContent = '✅ تمت الإضافة';
-                }
-                status.style.color = 'var(--space-blue)';
-                clearForm();
-                loadData();
-            } catch (e) { status.textContent = '❌ خطأ: ' + e.message; status.style.color = '#FF2E63'; }
+
+            const editId = document.getElementById('editId').value;
+            if (editId) {
+                await updateDoc(doc(db, "packages", editId), data);
+                status.textContent = '✅ تم التعديل';
+            } else {
+                await addDoc(collection(db, "packages"), data);
+                status.textContent = '✅ تمت الإضافة';
+            }
+            document.getElementById('cancelBtn').click();
+            loadData();
         };
 
-        function clearForm() {
+        document.getElementById('cancelBtn').onclick = () => {
+            document.getElementById('editId').value = '';
             document.getElementById('name').value = '';
             document.getElementById('speed').value = '';
             document.getElementById('price').value = '';
             document.getElementById('features').value = '';
             document.getElementById('featured').value = 'false';
-            document.getElementById('editId').value = '';
             document.getElementById('cancelBtn').style.display = 'none';
-        }
-        document.getElementById('cancelBtn').onclick = clearForm;
+            status.textContent = '';
+        };
 
         window.editPackage = (id, name, speed, price, featured, features) => {
             document.getElementById('editId').value = id;
             document.getElementById('name').value = name;
             document.getElementById('speed').value = speed;
             document.getElementById('price').value = price;
-            document.getElementById('featured').value = featured.toString();
-            document.getElementById('features').value = features.replace(/\\n/g, '\n');
+            document.getElementById('featured').value = featured;
+            document.getElementById('features').value = features;
             document.getElementById('cancelBtn').style.display = 'inline-block';
             window.scrollTo(0, 0);
         };
 
         window.deletePackage = async (id) => {
-            if (confirm('متأكد بدك تحذف الباقة؟')) {
+            if (confirm('متأكد من الحذف؟')) {
                 await deleteDoc(doc(db, "packages", id));
                 loadData();
             }
@@ -246,16 +245,7 @@
             loadData();
         };
 
-        window.showImage = (url) => {
-            document.getElementById('modalImage').src = url;
-            document.getElementById('imageModal').classList.add('show');
-        };
-
-        window.closeModal = () => {
-            document.getElementById('imageModal').classList.remove('show');
-        };
-
         loadData();
     </script>
 </body>
-</html>                          
+</html>
