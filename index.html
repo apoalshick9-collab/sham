@@ -1,5 +1,4 @@
-    
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
@@ -15,44 +14,52 @@
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: "Cairo", sans-serif; background: var(--space-dark); color: var(--text-main); overflow-x: hidden; }
-        .stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%); }
+       .stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%); }
         nav { position: fixed; top: 0; width: 100%; padding: 20px 5%; background: rgba(11, 14, 35, 0.8); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0, 217, 255, 0.2); z-index: 1000; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-family: "Tajawal", sans-serif; font-size: 28px; font-weight: 900; background: linear-gradient(45deg, var(--space-blue), var(--space-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .nav-links { display: flex; gap: 30px; }
-        .nav-links a { color: var(--text-main); text-decoration: none; font-weight: 600; transition: 0.3s; }
-        .nav-links a:hover { color: var(--space-blue); }
-        .btn { padding: 12px 30px; border-radius: 50px; font-weight: 700; text-decoration: none; transition: 0.3s; border: none; cursor: pointer; display: inline-block; }
-        .btn-primary { background: linear-gradient(45deg, var(--space-blue), var(--space-purple)); color: white; }
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0, 217, 255, 0.4); }
-        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 120px 5% 60px; position: relative; z-index: 1; }
-        .hero-content { max-width: 900px; }
-        .hero h1 { font-family: "Tajawal", sans-serif; font-size: 64px; font-weight: 900; margin-bottom: 20px; line-height: 1.2; }
-        .hero h1 span { background: linear-gradient(45deg, var(--space-blue), var(--space-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero p { font-size: 22px; color: var(--text-secondary); margin-bottom: 40px; line-height: 1.8; }
-        .hero-buttons { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
-        .btn-outline { border: 2px solid var(--space-blue); color: var(--space-blue); background: transparent; }
-        .btn-outline:hover { background: var(--space-blue); color: var(--space-dark); }
-        .section { padding: 100px 5%; position: relative; z-index: 1; }
-        .section-title { text-align: center; font-family: "Tajawal", sans-serif; font-size: 48px; font-weight: 900; margin-bottom: 60px; }
-        .pricing { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
-        .price-card { background: var(--card-bg); border: 1px solid rgba(123, 47, 255, 0.3); border-radius: 20px; padding: 50px 40px; text-align: center; backdrop-filter: blur(10px); position: relative; transition: 0.3s; }
-        .price-card.featured { border: 2px solid var(--space-blue); transform: scale(1.05); }
-        .price-card.featured::before { content: "الأكثر طلباً"; position: absolute; top: -15px; right: 50%; transform: translateX(50%); background: linear-gradient(45deg, var(--space-blue), var(--space-purple)); padding: 5px 20px; border-radius: 20px; font-size: 14px; font-weight: 700; }
-        .price-card h3 { font-size: 28px; margin-bottom: 10px; }
-        .price { font-size: 56px; font-weight: 900; margin: 20px 0; background: linear-gradient(45deg, var(--space-blue), var(--space-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .price span { font-size: 18px; color: var(--text-secondary); }
-        .price-features { list-style: none; margin: 30px 0; text-align: right; }
-        .price-features li { padding: 12px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); color: var(--text-secondary); }
-        .price-features li i { color: var(--space-blue); margin-left: 10px; }
-        .order-form { max-width: 600px; margin: 60px auto 0; background: var(--card-bg); border: 1px solid rgba(0, 217, 255, 0.3); border-radius: 20px; padding: 40px; backdrop-filter: blur(10px); }
-        .form-group { margin-bottom: 20px; text-align: right; }
-        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--text-main); }
-        .form-group input, .form-group select { width: 100%; padding: 15px; border-radius: 10px; border: 1px solid rgba(0, 217, 255, 0.3); background: rgba(0, 0, 0, 0.3); color: var(--text-main); font-family: "Cairo"; font-size: 16px; }
-        .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--space-blue); }
+       .logo { font-family: "Tajawal", sans-serif; font-size: 28px; font-weight: 900; background: linear-gradient(45deg, var(--space-blue), var(--space-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+       .nav-links { display: flex; gap: 30px; }
+       .nav-links a { color: var(--text-main); text-decoration: none; font-weight: 600; transition: 0.3s; }
+       .nav-links a:hover { color: var(--space-blue); }
+       .btn { padding: 12px 30px; border-radius: 50px; font-weight: 700; text-decoration: none; transition: 0.3s; border: none; cursor: pointer; display: inline-block; }
+       .btn-primary { background: linear-gradient(45deg, var(--space-blue), var(--space-purple)); color: white; }
+       .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0, 217, 255, 0.4); }
+       .btn-success { background: linear-gradient(45deg, #00ff88, #00cc6a); color: white; }
+       .btn-success:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0, 255, 136, 0.4); }
+       .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 120px 5% 60px; position: relative; z-index: 1; }
+       .hero-content { max-width: 900px; }
+       .hero h1 { font-family: "Tajawal", sans-serif; font-size: 64px; font-weight: 900; margin-bottom: 20px; line-height: 1.2; }
+       .hero h1 span { background: linear-gradient(45deg, var(--space-blue), var(--space-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+       .hero p { font-size: 22px; color: var(--text-secondary); margin-bottom: 40px; line-height: 1.8; }
+       .section { padding: 100px 5%; position: relative; z-index: 1; }
+       .section-title { text-align: center; font-family: "Tajawal", sans-serif; font-size: 48px; font-weight: 900; margin-bottom: 60px; }
+       .pricing { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
+       .price-card { background: var(--card-bg); border: 1px solid rgba(123, 47, 255, 0.3); border-radius: 20px; padding: 50px 40px; text-align: center; backdrop-filter: blur(10px); position: relative; transition: 0.3s; }
+       .price-card.featured { border: 2px solid var(--space-blue); transform: scale(1.05); }
+       .price-card.featured::before { content: "الأكثر طلباً"; position: absolute; top: -15px; right: 50%; transform: translateX(50%); background: linear-gradient(45deg, var(--space-blue), var(--space-purple)); padding: 5px 20px; border-radius: 20px; font-size: 14px; font-weight: 700; }
+       .price-card h3 { font-size: 28px; margin-bottom: 10px; }
+       .price { font-size: 56px; font-weight: 900; margin: 20px 0; background: linear-gradient(45deg, var(--space-blue), var(--space-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+       .price span { font-size: 18px; color: var(--text-secondary); }
+       .price-features { list-style: none; margin: 30px 0; text-align: right; }
+       .price-features li { padding: 12px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); color: var(--text-secondary); }
+       .price-features li i { color: var(--space-blue); margin-left: 10px; }
+       .order-form { max-width: 600px; margin: 60px auto 0; background: var(--card-bg); border: 1px solid rgba(0, 217, 255, 0.3); border-radius: 20px; padding: 40px; backdrop-filter: blur(10px); }
+       .form-group { margin-bottom: 20px; text-align: right; }
+       .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--text-main); }
+       .form-group input,.form-group select { width: 100%; padding: 15px; border-radius: 10px; border: 1px solid rgba(0, 217, 255, 0.3); background: rgba(0, 0, 0, 0.3); color: var(--text-main); font-family: "Cairo"; font-size: 16px; }
+       .form-group input:focus,.form-group select:focus { outline: none; border-color: var(--space-blue); }
+       .payment-section { background: rgba(0, 217, 255, 0.1); border: 1px solid rgba(0, 217, 255, 0.3); border-radius: 15px; padding: 25px; margin: 25px 0; display: none; }
+       .payment-section.show { display: block; }
+       .payment-section h4 { color: var(--space-blue); margin-bottom: 15px; font-size: 20px; }
+       .payment-info { background: rgba(0, 0, 0, 0.3); padding: 15px; border-radius: 10px; margin: 15px 0; font-size: 15px; line-height: 1.8; }
+       .file-input-wrapper { position: relative; margin-top: 15px; }
+       .file-input-wrapper input[type="file"] { display: none; }
+       .file-input-label { display: block; padding: 15px; background: rgba(0, 217, 255, 0.2); border: 2px dashed var(--space-blue); border-radius: 10px; text-align: center; cursor: pointer; transition: 0.3s; }
+       .file-input-label:hover { background: rgba(0, 217, 255, 0.3); }
+       .file-name { margin-top: 10px; color: var(--space-blue); font-size: 14px; }
         footer { background: rgba(0, 0, 0, 0.5); border-top: 1px solid rgba(0, 217, 255, 0.2); padding: 60px 5% 30px; text-align: center; position: relative; z-index: 1; }
-        .loading-msg { text-align: center; color: var(--text-secondary); grid-column: 1 / -1; }
-        .error-msg { text-align: center; color: #FF2E63; grid-column: 1 / -1; }
-        @media (max-width: 768px) { .hero h1 { font-size: 40px; } .hero p { font-size: 18px; } .nav-links { display: none; } .price-card.featured { transform: scale(1); } }
+       .loading-msg { text-align: center; color: var(--text-secondary); grid-column: 1 / -1; }
+       .error-msg { text-align: center; color: #FF2E63; grid-column: 1 / -1; }
+        @media (max-width: 768px) {.hero h1 { font-size: 40px; }.nav-links { display: none; }.price-card.featured { transform: scale(1); } }
     </style>
 </head>
 <body>
@@ -71,10 +78,6 @@
         <div class="hero-content">
             <h1>إنترنت فضائي <span>بسرعة الضوء</span><br>من الفضاء لبيتك مباشرة</h1>
             <p>مع شام نت، ودّع الانقطاعات وبطء النت. تقنية الأقمار الصناعية منخفضة المدار تغطي سوريا كاملة بسرعات تصل لـ 250 ميجا</p>
-            <div class="hero-buttons">
-                <a href="#order" class="btn btn-primary">اطلب اشتراك <i class="fa-solid fa-arrow-down"></i></a>
-                <a href="#pricing" class="btn btn-outline">شوف الباقات</a>
-            </div>
         </div>
     </section>
 
@@ -90,24 +93,46 @@
         <div class="order-form">
             <form id="orderForm">
                 <div class="form-group">
-                    <label>الاسم الكامل</label>
+                    <label>الاسم الكامل *</label>
                     <input type="text" id="customerName" required placeholder="محمد أحمد">
                 </div>
                 <div class="form-group">
-                    <label>رقم الموبايل</label>
+                    <label>رقم الموبايل *</label>
                     <input type="tel" id="customerPhone" required placeholder="0999123456">
                 </div>
                 <div class="form-group">
-                    <label>المحافظة</label>
+                    <label>المحافظة *</label>
                     <input type="text" id="customerCity" required placeholder="دمشق">
                 </div>
                 <div class="form-group">
-                    <label>اختر الباقة</label>
+                    <label>اختر الباقة *</label>
                     <select id="selectedPackage" required>
                         <option value="">جاري تحميل الباقات...</option>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">إرسال الطلب <i class="fa-solid fa-paper-plane"></i></button>
+
+                <div class="payment-section" id="paymentSection">
+                    <h4><i class="fa-solid fa-credit-card"></i> الدفع عبر الشام كاش - اختياري</h4>
+                    <div class="payment-info">
+                        <strong>رقم حساب شام كاش:</strong> 1234567890<br>
+                        <strong>الاسم:</strong> شام نت<br>
+                        <strong>ملاحظة:</strong> حول المبلغ + اكتب رقمك بالملاحظات، وارفع صورة التحويل
+                    </div>
+                    <div class="file-input-wrapper">
+                        <input type="file" id="paymentProof" accept="image/*">
+                        <label for="paymentProof" class="file-input-label">
+                            <i class="fa-solid fa-cloud-upload-alt"></i> اضغط لرفع صورة توثيق الدفع
+                        </label>
+                        <div class="file-name" id="fileName"></div>
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-success" style="width: 100%; margin-bottom: 15px;" id="showPaymentBtn">
+                    <i class="fa-solid fa-wallet"></i> الدفع عبر الشام كاش
+                </button>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <i class="fa-solid fa-paper-plane"></i> إرسال الطلب
+                </button>
             </form>
             <p id="orderMsg" style="text-align: center; margin-top: 20px; color: var(--space-blue);"></p>
         </div>
@@ -120,6 +145,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import { getFirestore, collection, getDocs, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+        import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyAg0LGjb6rcMlMZUn15R73_pX2VXBOp0Xc",
@@ -132,7 +158,20 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
+        const storage = getStorage(app);
         let packages = [];
+        let paymentProofFile = null;
+
+        document.getElementById('showPaymentBtn').onclick = () => {
+            document.getElementById('paymentSection').classList.toggle('show');
+        };
+
+        document.getElementById('paymentProof').onchange = (e) => {
+            paymentProofFile = e.target.files[0];
+            if (paymentProofFile) {
+                document.getElementById('fileName').textContent = '✓ ' + paymentProofFile.name;
+            }
+        };
 
         async function loadPackages() {
             try {
@@ -142,22 +181,22 @@
                 container.innerHTML = '';
                 select.innerHTML = '<option value="">اختر باقتك</option>';
                 packages = [];
-                
+
                 if (querySnapshot.empty) {
-                    container.innerHTML = '<p class="loading-msg">لا توجد باقات حالياً. ضيف باقات من لوحة التحكم</p>';
+                    container.innerHTML = '<p class="loading-msg">لا توجد باقات حالياً</p>';
                     return;
                 }
 
                 querySnapshot.forEach((doc) => {
-                    const pkg = { id: doc.id, ...doc.data() };
+                    const pkg = { id: doc.id,...doc.data() };
                     packages.push(pkg);
                     container.innerHTML += `
-                        <div class="price-card ${pkg.featured ? 'featured' : ''}">
+                        <div class="price-card ${pkg.featured? 'featured' : ''}">
                             <h3>${pkg.name}</h3>
                             <div class="price">$${pkg.price}<span>/شهر</span></div>
                             <ul class="price-features">
                                 <li><i class="fa-solid fa-check"></i> سرعة ${pkg.speed} Mbps</li>
-                                ${pkg.features && Array.isArray(pkg.features) ? pkg.features.map(f => `<li><i class="fa-solid fa-check"></i> ${f}</li>`).join('') : ''}
+                                ${pkg.features && Array.isArray(pkg.features)? pkg.features.map(f => `<li><i class="fa-solid fa-check"></i> ${f}</li>`).join('') : ''}
                             </ul>
                         </div>
                     `;
@@ -172,13 +211,24 @@
             e.preventDefault();
             const msg = document.getElementById('orderMsg');
             msg.textContent = 'جاري إرسال طلبك...';
+            msg.style.color = 'var(--space-blue)';
+
             const selectedPkg = packages.find(p => p.id === document.getElementById('selectedPackage').value);
             if (!selectedPkg) {
                 msg.textContent = '❌ اختر باقة أول';
                 msg.style.color = '#FF2E63';
                 return;
             }
+
             try {
+                let paymentProofUrl = '';
+                if (paymentProofFile) {
+                    msg.textContent = 'جاري رفع صورة الدفع...';
+                    const storageRef = ref(storage, `payments/${Date.now()}_${paymentProofFile.name}`);
+                    await uploadBytes(storageRef, paymentProofFile);
+                    paymentProofUrl = await getDownloadURL(storageRef);
+                }
+
                 await addDoc(collection(db, "orders"), {
                     name: document.getElementById('customerName').value,
                     phone: document.getElementById('customerPhone').value,
@@ -186,14 +236,20 @@
                     packageName: selectedPkg.name,
                     packageSpeed: selectedPkg.speed,
                     packagePrice: selectedPkg.price,
+                    paymentProof: paymentProofUrl,
+                    paymentStatus: paymentProofUrl? 'تم الدفع' : 'بانتظار الدفع',
                     status: 'جديد',
                     createdAt: serverTimestamp()
                 });
+
                 msg.textContent = '✅ تم استلام طلبك! رح نتواصل معك خلال 24 ساعة';
                 msg.style.color = 'var(--space-blue)';
                 document.getElementById('orderForm').reset();
+                document.getElementById('fileName').textContent = '';
+                paymentProofFile = null;
+                document.getElementById('paymentSection').classList.remove('show');
             } catch (error) {
-                msg.textContent = '❌ صار خطأ، جرب مرة تانية';
+                msg.textContent = '❌ صار خطأ: ' + error.message;
                 msg.style.color = '#FF2E63';
             }
         });
