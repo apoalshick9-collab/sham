@@ -35,6 +35,8 @@
        .btn-success { background: #00ff88; color: #0B0E23; padding: 8px 15px; font-size: 14px; margin-left: 8px; }
        .btn-copy { background: rgba(0, 217, 255, 0.2); color: var(--space-blue); padding: 6px 12px; font-size: 12px; border: 1px solid var(--space-blue); }
        .btn-copy:hover { background: var(--space-blue); color: #0B0E23; }
+       .btn-export { background: linear-gradient(45deg, #00ff88, #00cc6a); color: #0B0E23; padding: 10px 20px; font-size: 14px; }
+       .btn-export:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(0, 255, 136, 0.3); }
         table { width: 100%; border-collapse: collapse; margin-top: 20px; }
         th, td { padding: 15px; text-align: right; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
         th { color: var(--space-blue); font-weight: 700; }
@@ -48,6 +50,11 @@
        .badge-pending { background: rgba(255, 160, 0, 0.2); color: #ffa000; }
        .payment-code { font-family: monospace; background: rgba(0, 217, 255, 0.1); padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(0, 217, 255, 0.3); display: inline-block; margin-left: 8px; }
         #status { margin-top: 15px; font-weight: bold; }
+       .filter-tabs { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+       .filter-tab { padding: 10px 20px; border-radius: 50px; border: 1px solid rgba(0, 217, 255, 0.3); background: rgba(0, 0, 0, 0.3); color: var(--text-secondary); cursor: pointer; transition: 0.3s; font-weight: 600; }
+       .filter-tab:hover { border-color: var(--space-blue); color: var(--space-blue); }
+       .filter-tab.active { background: linear-gradient(45deg, var(--space-blue), var(--space-purple)); color: white; border-color: transparent; }
+       .table-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px; }
     </style>
 </head>
 <body>
@@ -101,7 +108,17 @@
         </div>
 
         <div class="card">
-            <h2><i class="fa-solid fa-clipboard-list"></i> الطلبات</h2>
+            <div class="table-header">
+                <h2><i class="fa-solid fa-clipboard-list"></i> الطلبات</h2>
+                <button class="btn btn-export" onclick="exportToExcel()"><i class="fa-solid fa-file-excel"></i> تصدير للأكسل</button>
+            </div>
+            <div class="filter-tabs">
+                <div class="filter-tab active" onclick="filterOrders('الكل')">الكل</div>
+                <div class="filter-tab" onclick="filterOrders('جديد')">جديد</div>
+                <div class="filter-tab" onclick="filterOrders('قيد المعالجة')">قيد المعالجة</div>
+                <div class="filter-tab" onclick="filterOrders('تم التوصيل')">تم التوصيل</div>
+                <div class="filter-tab" onclick="filterOrders('ملغي')">ملغي</div>
+            </div>
             <table>
                 <thead><tr><th>الاسم</th><th>الهاتف</th><th>المدينة</th><th>الباقة</th><th>الحالة</th><th>الدفع</th><th>كود التفعيل</th><th>اجراءات</th></tr></thead>
                 <tbody id="ordersTable"></tbody>
@@ -125,11 +142,74 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         const status = document.getElementById('status');
+        let allOrders = [];
+        let currentFilter = 'الكل';
 
         window.copyCode = function(code) {
             navigator.clipboard.writeText(code).then(() => {
                 alert('✅ تم نسخ كود التفعيل: ' + code);
             });
+        }
+
+        window.filterOrders = function(status) {
+            currentFilter = status;
+            document.querySelectorAll('.filter-tab').forEach(tab => {
+                tab.classList.remove('active');
+                if (tab.textContent === status) tab.classList.add('active');
+            });
+            renderOrders();
+        }
+
+        window.exportToExcel = function() {
+            const filtered = currentFilter === 'الكل' ? allOrders : allOrders.filter(o => o.status === currentFilter);
+            let csv = '\ufeffالاسم,الهاتف,المدينة,الباقة,السرعة,السعر,الحالة,الدفع,كود التفعيل,التاريخ\n';
+            
+            filtered.forEach(o => {
+                const date = o.createdAt ? new Date(o.createdAt.seconds * 1000).toLocaleDateString('ar-SY') : '';
+                csv += `"${o.name}","${o.phone}","${o.city}","${o.packageName}","${o.packageSpeed} Mbps","$${o.packagePrice}","${o.status}","${o.paymentStatus}","${o.paymentCode || '-'}","${date}"\n`;
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `طلبات_شام_نت_${currentFilter}_${new Date().toISOString().split('T')[0]}.csv`;
+            link.click();
+        }
+
+        function renderOrders() {
+            const filtered = currentFilter === 'الكل' ? allOrders : allOrders.filter(o => o.status === currentFilter);
+            let ordersHtml = '';
+
+            filtered.forEach((docSnap) => {
+                const o = docSnap.data;
+                const id = docSnap.id;
+                const statusClass = o.status === 'جديد'? 'badge-new' : o.status === 'قيد المعالجة'? 'badge-processing' : o.status === 'تم التوصيل'? 'badge-done' : 'badge-cancelled';
+                const paymentClass = o.paymentStatus === 'تم الدفع'? 'badge-paid' : 'badge-pending';
+                const paymentCodeDisplay = o.paymentCode && o.paymentCode !== 'غير مدخل' 
+                    ? `<span class="payment-code">${o.paymentCode}</span><button class="btn btn-copy" onclick="copyCode('${o.paymentCode}')"><i class="fa-solid fa-copy"></i> نسخ</button>` 
+                    : '<span style="color: #94a3b8;">-</span>';
+
+                ordersHtml += `<tr>
+                    <td>${o.name}</td>
+                    <td>${o.phone}</td>
+                    <td>${o.city}</td>
+                    <td>${o.packageName}</td>
+                    <td><span class="badge ${statusClass}">${o.status}</span></td>
+                    <td><span class="badge ${paymentClass}">${o.paymentStatus || 'بانتظار الدفع'}</span></td>
+                    <td>${paymentCodeDisplay}</td>
+                    <td>
+                        <select onchange="updateOrderStatus('${id}', this.value)" style="padding: 8px; border-radius: 8px; background: rgba(0,0,0,0.3); color: white; border: 1px solid rgba(0,217,255,0.3); margin-left: 8px;">
+                            <option value="جديد" ${o.status === 'جديد'? 'selected' : ''}>جديد</option>
+                            <option value="قيد المعالجة" ${o.status === 'قيد المعالجة'? 'selected' : ''}>قيد المعالجة</option>
+                            <option value="تم التوصيل" ${o.status === 'تم التوصيل'? 'selected' : ''}>تم التوصيل</option>
+                            <option value="ملغي" ${o.status === 'ملغي'? 'selected' : ''}>ملغي</option>
+                        </select>
+                        <button class="btn btn-danger" onclick="deleteOrder('${id}')"><i class="fa-solid fa-trash"></i> حذف</button>
+                    </td>
+                </tr>`;
+            });
+
+            document.getElementById('ordersTable').innerHTML = ordersHtml || '<tr><td colspan="8">لا توجد طلبات</td></tr>';
         }
 
         async function loadData() {
@@ -149,44 +229,21 @@
             document.getElementById('packagesTable').innerHTML = html || '<tr><td colspan="5">لا توجد باقات</td></tr>';
 
             const ordersSnap = await getDocs(query(collection(db, "orders"), orderBy("createdAt", "desc")));
-            let ordersHtml = '';
+            allOrders = [];
             let newCount = 0, paidCount = 0, deliveredCount = 0;
 
             ordersSnap.forEach((docSnap) => {
                 const o = docSnap.data();
+                allOrders.push({ id: docSnap.id, data: o });
                 if (o.status === 'جديد') newCount++;
                 if (o.paymentStatus === 'تم الدفع') paidCount++;
                 if (o.status === 'تم التوصيل') deliveredCount++;
-
-                const statusClass = o.status === 'جديد'? 'badge-new' : o.status === 'قيد المعالجة'? 'badge-processing' : o.status === 'تم التوصيل'? 'badge-done' : 'badge-cancelled';
-                const paymentClass = o.paymentStatus === 'تم الدفع'? 'badge-paid' : 'badge-pending';
-                const paymentCodeDisplay = o.paymentCode && o.paymentCode !== 'غير مدخل' 
-                    ? `<span class="payment-code">${o.paymentCode}</span><button class="btn btn-copy" onclick="copyCode('${o.paymentCode}')"><i class="fa-solid fa-copy"></i> نسخ</button>` 
-                    : '<span style="color: #94a3b8;">-</span>';
-
-                ordersHtml += `<tr>
-                    <td>${o.name}</td>
-                    <td>${o.phone}</td>
-                    <td>${o.city}</td>
-                    <td>${o.packageName}</td>
-                    <td><span class="badge ${statusClass}">${o.status}</span></td>
-                    <td><span class="badge ${paymentClass}">${o.paymentStatus || 'بانتظار الدفع'}</span></td>
-                    <td>${paymentCodeDisplay}</td>
-                    <td>
-                        <select onchange="updateOrderStatus('${docSnap.id}', this.value)" style="padding: 8px; border-radius: 8px; background: rgba(0,0,0,0.3); color: white; border: 1px solid rgba(0,217,255,0.3);">
-                            <option value="جديد" ${o.status === 'جديد'? 'selected' : ''}>جديد</option>
-                            <option value="قيد المعالجة" ${o.status === 'قيد المعالجة'? 'selected' : ''}>قيد المعالجة</option>
-                            <option value="تم التوصيل" ${o.status === 'تم التوصيل'? 'selected' : ''}>تم التوصيل</option>
-                            <option value="ملغي" ${o.status === 'ملغي'? 'selected' : ''}>ملغي</option>
-                        </select>
-                    </td>
-                </tr>`;
             });
 
-            document.getElementById('ordersTable').innerHTML = ordersHtml || '<tr><td colspan="8">لا توجد طلبات</td></tr>';
             document.getElementById('newOrders').textContent = newCount;
             document.getElementById('paidOrders').textContent = paidCount;
             document.getElementById('deliveredOrders').textContent = deliveredCount;
+            renderOrders();
         }
 
         document.getElementById('saveBtn').onclick = async () => {
@@ -234,8 +291,15 @@
         };
 
         window.deletePackage = async (id) => {
-            if (confirm('متأكد من الحذف؟')) {
+            if (confirm('متأكد من حذف الباقة؟')) {
                 await deleteDoc(doc(db, "packages", id));
+                loadData();
+            }
+        };
+
+        window.deleteOrder = async (id) => {
+            if (confirm('متأكد من حذف الطلب؟ لا يمكن التراجع!')) {
+                await deleteDoc(doc(db, "orders", id));
                 loadData();
             }
         };
@@ -248,4 +312,4 @@
         loadData();
     </script>
 </body>
-</html>
+</html>                                
