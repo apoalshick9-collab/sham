@@ -1,4 +1,4 @@
-   <!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
@@ -161,12 +161,13 @@
         }
 
         window.exportToExcel = function() {
-            const filtered = currentFilter === 'الكل' ? allOrders : allOrders.filter(o => o.status === currentFilter);
+            const filtered = currentFilter === 'الكل' ? allOrders : allOrders.filter(o => o.data.status === currentFilter);
             let csv = '\ufeffالاسم,الهاتف,المدينة,الباقة,السرعة,السعر,الحالة,الدفع,كود التفعيل,التاريخ\n';
             
-            filtered.forEach(o => {
+            filtered.forEach(item => {
+                const o = item.data;
                 const date = o.createdAt ? new Date(o.createdAt.seconds * 1000).toLocaleDateString('ar-SY') : '';
-                csv += `"${o.name}","${o.phone}","${o.city}","${o.packageName}","${o.packageSpeed} Mbps","$${o.packagePrice}","${o.status}","${o.paymentStatus}","${o.paymentCode || '-'}","${date}"\n`;
+                csv += `"${o.name || ''}","${o.phone || ''}","${o.city || ''}","${o.packageName || ''}","${o.packageSpeed || ''} Mbps","$${o.packagePrice || ''}","${o.status || ''}","${o.paymentStatus || ''}","${o.paymentCode || '-'}","${date}"\n`;
             });
 
             const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
@@ -177,12 +178,12 @@
         }
 
         function renderOrders() {
-            const filtered = currentFilter === 'الكل' ? allOrders : allOrders.filter(o => o.status === currentFilter);
+            const filtered = currentFilter === 'الكل' ? allOrders : allOrders.filter(item => item.data.status === currentFilter);
             let ordersHtml = '';
 
-            filtered.forEach((docSnap) => {
-                const o = docSnap.data;
-                const id = docSnap.id;
+            filtered.forEach((item) => {
+                const o = item.data;
+                const id = item.id;
                 const statusClass = o.status === 'جديد'? 'badge-new' : o.status === 'قيد المعالجة'? 'badge-processing' : o.status === 'تم التوصيل'? 'badge-done' : 'badge-cancelled';
                 const paymentClass = o.paymentStatus === 'تم الدفع'? 'badge-paid' : 'badge-pending';
                 const paymentCodeDisplay = o.paymentCode && o.paymentCode !== 'غير مدخل' 
@@ -190,11 +191,11 @@
                     : '<span style="color: #94a3b8;">-</span>';
 
                 ordersHtml += `<tr>
-                    <td>${o.name}</td>
-                    <td>${o.phone}</td>
-                    <td>${o.city}</td>
-                    <td>${o.packageName}</td>
-                    <td><span class="badge ${statusClass}">${o.status}</span></td>
+                    <td>${o.name || ''}</td>
+                    <td>${o.phone || ''}</td>
+                    <td>${o.city || ''}</td>
+                    <td>${o.packageName || ''}</td>
+                    <td><span class="badge ${statusClass}">${o.status || ''}</span></td>
                     <td><span class="badge ${paymentClass}">${o.paymentStatus || 'بانتظار الدفع'}</span></td>
                     <td>${paymentCodeDisplay}</td>
                     <td>
@@ -312,4 +313,4 @@
         loadData();
     </script>
 </body>
-</html>                                
+</html>                                    
