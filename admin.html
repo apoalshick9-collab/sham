@@ -1,240 +1,176 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>لوحة تحكم شام نت</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { 
-      font-family: 'Segoe UI', Tahoma, sans-serif; 
-      background: linear-gradient(180deg, #0a1929 0%, #1a3a5f 100%); 
-      color: white; 
-      min-height: 100vh;
-    }
-    .navbar {
-      background: rgba(0,0,0,0.3);
-      backdrop-filter: blur(10px);
-      padding: 15px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-    .nav-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .logo { font-size: 22px; font-weight: bold; color: #00d4ff; }
-    .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
-    .card {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 15px;
-      padding: 30px;
-      margin-bottom: 30px;
-      backdrop-filter: blur(10px);
-    }
-    .card h2 {
-      color: #00d4ff;
-      margin-bottom: 20px;
-      font-size: 24px;
-    }
-    .form-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 15px;
-    }
-    .form-group { margin-bottom: 15px; }
-    .form-group label {
-      display: block;
-      margin-bottom: 8px;
-      color: rgba(255,255,255,0.9);
-    }
-    .form-group input, .form-group textarea {
-      width: 100%;
-      padding: 12px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 8px;
-      color: white;
-      font-size: 15px;
-    }
-    .btn {
-      padding: 12px 25px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 16px;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-    .btn-primary {
-      background: linear-gradient(135deg, #00d4ff, #0099cc);
-      color: white;
-    }
-    .btn-danger {
-      background: #e53935;
-      color: white;
-      padding: 8px 15px;
-      font-size: 14px;
-    }
-    .btn-warning {
-      background: #ffa000;
-      color: white;
-      padding: 8px 15px;
-      font-size: 14px;
-      margin-left: 8px;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-    th, td {
-      padding: 14px;
-      text-align: right;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-    th { color: #00d4ff; }
-    tr:hover { background: rgba(255,255,255,0.03); }
-    #status { margin-top: 15px; font-weight: bold; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم شام نت</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --space-dark: #0B0E23; --space-blue: #00D9FF; --space-purple: #7B2FFF;
+            --text-main: #FFFFFF; --text-secondary: #B8C5D6; --card-bg: rgba(255, 255, 255, 0.05);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "Cairo", sans-serif; background: var(--space-dark); color: var(--text-main); }
+        .stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%); }
+        nav { position: fixed; top: 0; width: 100%; padding: 20px 5%; background: rgba(11, 14, 35, 0.8); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0, 217, 255, 0.2); z-index: 1000; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 24px; font-weight: 900; background: linear-gradient(45deg, var(--space-blue), var(--space-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .container { max-width: 1200px; margin: 120px auto 40px; padding: 0 5%; position: relative; z-index: 1; }
+        .card { background: var(--card-bg); border: 1px solid rgba(0, 217, 255, 0.2); border-radius: 20px; padding: 40px; margin-bottom: 30px; backdrop-filter: blur(10px); }
+        .card h2 { color: var(--space-blue); margin-bottom: 25px; font-size: 28px; }
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .form-group { margin-bottom: 20px; text-align: right; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; }
+        .form-group input, .form-group textarea { width: 100%; padding: 15px; border-radius: 10px; border: 1px solid rgba(0, 217, 255, 0.3); background: rgba(0, 0, 0, 0.3); color: var(--text-main); font-family: "Cairo"; font-size: 16px; }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--space-blue); }
+        .btn { padding: 12px 25px; border-radius: 50px; font-weight: 700; border: none; cursor: pointer; transition: 0.3s; }
+        .btn-primary { background: linear-gradient(45deg, var(--space-blue), var(--space-purple)); color: white; }
+        .btn-danger { background: #FF2E63; color: white; padding: 8px 15px; font-size: 14px; }
+        .btn-warning { background: #ffa000; color: white; padding: 8px 15px; font-size: 14px; margin-left: 8px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 15px; text-align: right; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+        th { color: var(--space-blue); font-weight: 700; }
+        tr:hover { background: rgba(255, 255, 255, 0.03); }
+        #status { margin-top: 15px; font-weight: bold; }
+    </style>
 </head>
 <body>
-  <nav class="navbar">
-    <div class="nav-content">
-      <div class="logo"><i class="fas fa-user-shield"></i> لوحة تحكم شام نت</div>
-      <div>الادمن</div>
+    <div class="stars"></div>
+    <nav>
+        <div class="logo"><i class="fa-solid fa-user-shield"></i> لوحة تحكم شام نت</div>
+        <div>مرحباً ادمن</div>
+    </nav>
+
+    <div class="container">
+        <div class="card">
+            <h2><i class="fa-solid fa-plus-circle"></i> إضافة / تعديل باقة</h2>
+            <input type="hidden" id="editId">
+            <div class="form-grid">
+                <div class="form-group"><label>اسم الباقة</label><input type="text" id="name" placeholder="باقة الضوء"></div>
+                <div class="form-group"><label>السرعة Mbps</label><input type="number" id="speed" placeholder="100"></div>
+                <div class="form-group"><label>السعر $</label><input type="number" id="price" placeholder="25"></div>
+                <div class="form-group"><label>مميزة؟</label><select id="featured" style="width: 100%; padding: 15px; border-radius: 10px; border: 1px solid rgba(0, 217, 255, 0.3); background: rgba(0, 0, 0, 0.3); color: var(--text-main);"><option value="false">لا</option><option value="true">نعم - الأكثر طلباً</option></select></div>
+            </div>
+            <div class="form-group"><label>المميزات - كل ميزة بسطر</label><textarea id="features" rows="4" placeholder="تحميل غير محدود&#10;دعم فني 24/7&#10;راوتر مجاني"></textarea></div>
+            <button class="btn btn-primary" id="saveBtn"><i class="fa-solid fa-save"></i> حفظ الباقة</button>
+            <button class="btn" id="cancelBtn" style="background:#777; margin-right:10px; display:none;">إلغاء</button>
+            <p id="status"></p>
+        </div>
+
+        <div class="card">
+            <h2><i class="fa-solid fa-list"></i> كل الباقات</h2>
+            <table>
+                <thead><tr><th>الاسم</th><th>السرعة</th><th>السعر</th><th>مميزة</th><th>اجراءات</th></tr></thead>
+                <tbody id="packagesTable"></tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <h2><i class="fa-solid fa-clipboard-list"></i> الطلبات الجديدة</h2>
+            <table>
+                <thead><tr><th>الاسم</th><th>الهاتف</th><th>المدينة</th><th>الباقة</th><th>التاريخ</th></tr></thead>
+                <tbody id="ordersTable"></tbody>
+            </table>
+        </div>
     </div>
-  </nav>
 
-  <div class="container">
-    <div class="card">
-      <h2><i class="fas fa-plus-circle"></i> إضافة / تعديل باقة</h2>
-      <input type="hidden" id="editId">
-      <div class="form-grid">
-        <div class="form-group"><label>اسم الباقة</label><input type="text" id="name"></div>
-        <div class="form-group"><label>السرعة Mbps</label><input type="number" id="speed"></div>
-        <div class="form-group"><label>المدة</label><input type="text" id="duration" placeholder="شهري"></div>
-        <div class="form-group"><label>السعر ل.س</label><input type="number" id="price"></div>
-      </div>
-      <div class="form-group"><label>الوصف</label><textarea id="description" rows="3"></textarea></div>
-      <button class="btn btn-primary" id="saveBtn"><i class="fas fa-save"></i> حفظ</button>
-      <button class="btn" id="cancelBtn" style="background:#777; margin-right:10px; display:none;">إلغاء</button>
-      <p id="status"></p>
-    </div>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-    <div class="card">
-      <h2><i class="fas fa-list"></i> كل الباقات</h2>
-      <table>
-        <thead><tr><th>الاسم</th><th>السرعة</th><th>السعر</th><th>المدة</th><th>اجراءات</th></tr></thead>
-        <tbody id="packagesTable"></tbody>
-      </table>
-    </div>
+        const firebaseConfig = {
+            apiKey: "AIzaSyAg0LGjb6rcMlMZUn15R73_pX2VXBOp0Xc",
+            authDomain: "syriastore1-dcee8.firebaseapp.com",
+            projectId: "syriastore1-dcee8",
+            storageBucket: "syriastore1-dcee8.firebasestorage.app",
+            messagingSenderId: "938774399039",
+            appId: "1:938774399039:web:72d8b51051043b69a6d08a"
+        };
 
-    <div class="card">
-      <h2><i class="fas fa-clipboard-list"></i> الطلبات الجديدة</h2>
-      <table>
-        <thead><tr><th>الاسم</th><th>الهاتف</th><th>الباقة</th><th>العنوان</th><th>التاريخ</th></tr></thead>
-        <tbody id="ordersTable"></tbody>
-      </table>
-    </div>
-  </div>
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const status = document.getElementById('status');
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+        async function loadData() {
+            const packagesSnap = await getDocs(collection(db, "packages"));
+            let html = '';
+            packagesSnap.forEach((docSnap) => {
+                const p = docSnap.data();
+                html += `<tr>
+                    <td>${p.name}</td><td>${p.speed} Mbps</td><td>$${p.price}</td><td>${p.featured ? 'نعم' : 'لا'}</td>
+                    <td>
+                        <button class="btn btn-warning" onclick="editPackage('${docSnap.id}', '${p.name}', '${p.speed}', '${p.price}', ${p.featured}, \`${(p.features || []).join('\\n')}\`)">تعديل</button>
+                        <button class="btn btn-danger" onclick="deletePackage('${docSnap.id}')">حذف</button>
+                    </td>
+                </tr>`;
+            });
+            document.getElementById('packagesTable').innerHTML = html || '<tr><td colspan="5">لا توجد باقات</td></tr>';
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyAyilyHxKFsCKDmX4i-7zPaiMXKP4c8m74",
-      authDomain: "flutter-ai-playground-c3bb0.firebaseapp.com",
-      projectId: "flutter-ai-playground-c3bb0",
-      storageBucket: "flutter-ai-playground-c3bb0.firebasestorage.app",
-      messagingSenderId: "1055759995979",
-      appId: "1:1055759995979:web:88dff2199c6c50f23769ce"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    const status = document.getElementById('status');
-
-    async function loadData() {
-      const packagesSnap = await getDocs(collection(db, "packages"));
-      let html = '';
-      packagesSnap.forEach((docSnap) => {
-        const p = docSnap.data();
-        html += `<tr>
-          <td>${p.name}</td><td>${p.speed} Mbps</td><td>${p.price} ل.س</td><td>${p.duration}</td>
-          <td>
-            <button class="btn btn-warning" onclick="editPackage('${docSnap.id}', '${p.name}', '${p.speed}', '${p.duration}', '${p.price}', '${p.description || ''}')">تعديل</button>
-            <button class="btn btn-danger" onclick="deletePackage('${docSnap.id}')">حذف</button>
-          </td>
-        </tr>`;
-      });
-      document.getElementById('packagesTable').innerHTML = html || '<tr><td colspan="5">لا توجد باقات</td></tr>';
-
-      const ordersSnap = await getDocs(query(collection(db, "orders"), orderBy("createdAt", "desc")));
-      let ordersHtml = '';
-      ordersSnap.forEach((docSnap) => {
-        const o = docSnap.data();
-        const date = o.createdAt ? new Date(o.createdAt.seconds * 1000).toLocaleDateString('ar-SY') : '';
-        ordersHtml += `<tr><td>${o.fullName}</td><td>${o.phone}</td><td>${o.packageId}</td><td>${o.address}</td><td>${date}</td></tr>`;
-      });
-      document.getElementById('ordersTable').innerHTML = ordersHtml || '<tr><td colspan="5">لا توجد طلبات</td></tr>';
-    }
-
-    document.getElementById('saveBtn').onclick = async () => {
-      const data = {
-        name: document.getElementById('name').value,
-        speed: document.getElementById('speed').value,
-        duration: document.getElementById('duration').value,
-        price: Number(document.getElementById('price').value),
-        description: document.getElementById('description').value,
-      };
-      const id = document.getElementById('editId').value;
-      try {
-        if (id) {
-          await updateDoc(doc(db, "packages", id), data);
-          status.textContent = 'تم التعديل';
-        } else {
-          await addDoc(collection(db, "packages"), {...data, createdAt: serverTimestamp()});
-          status.textContent = 'تمت الإضافة';
+            const ordersSnap = await getDocs(query(collection(db, "orders"), orderBy("createdAt", "desc")));
+            let ordersHtml = '';
+            ordersSnap.forEach((docSnap) => {
+                const o = docSnap.data();
+                const date = o.createdAt ? new Date(o.createdAt.seconds * 1000).toLocaleDateString('ar-SY') : '';
+                ordersHtml += `<tr><td>${o.name}</td><td>${o.phone}</td><td>${o.city}</td><td>${o.packageName}</td><td>${date}</td></tr>`;
+            });
+            document.getElementById('ordersTable').innerHTML = ordersHtml || '<tr><td colspan="5">لا توجد طلبات</td></tr>';
         }
-        status.style.color = '#00d4ff';
-        clearForm();
+
+        document.getElementById('saveBtn').onclick = async () => {
+            const features = document.getElementById('features').value.split('\n').filter(f => f.trim());
+            const data = {
+                name: document.getElementById('name').value,
+                speed: document.getElementById('speed').value,
+                price: Number(document.getElementById('price').value),
+                featured: document.getElementById('featured').value === 'true',
+                features: features
+            };
+            const id = document.getElementById('editId').value;
+            try {
+                if (id) {
+                    await updateDoc(doc(db, "packages", id), data);
+                    status.textContent = '✅ تم التعديل';
+                } else {
+                    await addDoc(collection(db, "packages"), {...data, createdAt: serverTimestamp()});
+                    status.textContent = '✅ تمت الإضافة';
+                }
+                status.style.color = 'var(--space-blue)';
+                clearForm();
+                loadData();
+            } catch (e) { status.textContent = '❌ خطأ: ' + e.message; status.style.color = '#FF2E63'; }
+        };
+
+        function clearForm() {
+            document.getElementById('name').value = '';
+            document.getElementById('speed').value = '';
+            document.getElementById('price').value = '';
+            document.getElementById('features').value = '';
+            document.getElementById('featured').value = 'false';
+            document.getElementById('editId').value = '';
+            document.getElementById('cancelBtn').style.display = 'none';
+        }
+        document.getElementById('cancelBtn').onclick = clearForm;
+
+        window.editPackage = (id, name, speed, price, featured, features) => {
+            document.getElementById('editId').value = id;
+            document.getElementById('name').value = name;
+            document.getElementById('speed').value = speed;
+            document.getElementById('price').value = price;
+            document.getElementById('featured').value = featured.toString();
+            document.getElementById('features').value = features.replace(/\\n/g, '\n');
+            document.getElementById('cancelBtn').style.display = 'inline-block';
+            window.scrollTo(0, 0);
+        };
+
+        window.deletePackage = async (id) => {
+            if (confirm('متأكد بدك تحذف الباقة؟')) {
+                await deleteDoc(doc(db, "packages", id));
+                loadData();
+            }
+        };
+
         loadData();
-      } catch (e) { status.textContent = 'خطأ: ' + e.message; status.style.color = '#ff6b6b'; }
-    };
-
-    function clearForm() {
-      document.querySelectorAll('input, textarea').forEach(i => i.value = '');
-      document.getElementById('editId').value = '';
-      document.getElementById('cancelBtn').style.display = 'none';
-    }
-    document.getElementById('cancelBtn').onclick = clearForm;
-
-    window.editPackage = (id, name, speed, duration, price, description) => {
-      document.getElementById('editId').value = id;
-      document.getElementById('name').value = name;
-      document.getElementById('speed').value = speed;
-      document.getElementById('duration').value = duration;
-      document.getElementById('price').value = price;
-      document.getElementById('description').value = description;
-      document.getElementById('cancelBtn').style.display = 'inline-block';
-      window.scrollTo(0, 0);
-    };
-
-    window.deletePackage = async (id) => {
-      if (confirm('حذف الباقة؟')) {
-        await deleteDoc(doc(db, "packages", id));
-        loadData();
-      }
-    };
-
-    loadData();
-  </script>
+    </script>
 </body>
 </html>
