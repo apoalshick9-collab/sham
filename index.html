@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+      <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
@@ -51,11 +51,6 @@
        .payment-section.show { display: block; }
        .payment-section h4 { color: var(--space-blue); margin-bottom: 15px; font-size: 20px; }
        .payment-info { background: rgba(0, 0, 0, 0.3); padding: 15px; border-radius: 10px; margin: 15px 0; font-size: 15px; line-height: 1.8; }
-       .file-input-wrapper { position: relative; margin-top: 15px; }
-       .file-input-wrapper input[type="file"] { display: none; }
-       .file-input-label { display: block; padding: 15px; background: rgba(0, 217, 255, 0.2); border: 2px dashed var(--space-blue); border-radius: 10px; text-align: center; cursor: pointer; transition: 0.3s; }
-       .file-input-label:hover { background: rgba(0, 217, 255, 0.3); }
-       .file-name { margin-top: 10px; color: var(--space-blue); font-size: 14px; }
         footer { background: rgba(0, 0, 0, 0.5); border-top: 1px solid rgba(0, 217, 255, 0.2); padding: 60px 5% 30px; text-align: center; position: relative; z-index: 1; }
        .loading-msg { text-align: center; color: var(--text-secondary); grid-column: 1 / -1; }
        .error-msg { text-align: center; color: #FF2E63; grid-column: 1 / -1; }
@@ -116,14 +111,12 @@
                     <div class="payment-info">
                         <strong>رقم حساب شام كاش:</strong> 1234567890<br>
                         <strong>الاسم:</strong> شام نت<br>
-                        <strong>ملاحظة:</strong> حول المبلغ + اكتب رقمك بالملاحظات، وارفع صورة التحويل
+                        <strong>ملاحظة:</strong> حول المبلغ + اكتب رقمك بالملاحظات، واكتب رقم العملية تحت
                     </div>
-                    <div class="file-input-wrapper">
-                        <input type="file" id="paymentProof" accept="image/*">
-                        <label for="paymentProof" class="file-input-label">
-                            <i class="fa-solid fa-cloud-upload-alt"></i> اضغط لرفع صورة توثيق الدفع
-                        </label>
-                        <div class="file-name" id="fileName"></div>
+                    <div class="form-group">
+                        <label>رقم عملية التحويل</label>
+                        <input type="text" id="paymentCode" placeholder="مثال: 123456789">
+                        <small style="color: #94a3b8; display: block; margin-top: 5px;">اذا حولت، اكتب رقم العملية للتأكيد</small>
                     </div>
                 </div>
 
@@ -145,7 +138,6 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import { getFirestore, collection, getDocs, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-        import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyAg0LGjb6rcMlMZUn15R73_pX2VXBOp0Xc",
@@ -158,19 +150,10 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
-        const storage = getStorage(app);
         let packages = [];
-        let paymentProofFile = null;
 
         document.getElementById('showPaymentBtn').onclick = () => {
             document.getElementById('paymentSection').classList.toggle('show');
-        };
-
-        document.getElementById('paymentProof').onchange = (e) => {
-            paymentProofFile = e.target.files[0];
-            if (paymentProofFile) {
-                document.getElementById('fileName').textContent = '✓ ' + paymentProofFile.name;
-            }
         };
 
         async function loadPackages() {
@@ -221,13 +204,7 @@
             }
 
             try {
-                let paymentProofUrl = '';
-                if (paymentProofFile) {
-                    msg.textContent = 'جاري رفع صورة الدفع...';
-                    const storageRef = ref(storage, `payments/${Date.now()}_${paymentProofFile.name}`);
-                    await uploadBytes(storageRef, paymentProofFile);
-                    paymentProofUrl = await getDownloadURL(storageRef);
-                }
+                const paymentCode = document.getElementById('paymentCode').value.trim();
 
                 await addDoc(collection(db, "orders"), {
                     name: document.getElementById('customerName').value,
@@ -236,8 +213,8 @@
                     packageName: selectedPkg.name,
                     packageSpeed: selectedPkg.speed,
                     packagePrice: selectedPkg.price,
-                    paymentProof: paymentProofUrl,
-                    paymentStatus: paymentProofUrl? 'تم الدفع' : 'بانتظار الدفع',
+                    paymentCode: paymentCode || 'غير مدخل',
+                    paymentStatus: paymentCode? 'تم الدفع' : 'بانتظار الدفع',
                     status: 'جديد',
                     createdAt: serverTimestamp()
                 });
@@ -245,8 +222,6 @@
                 msg.textContent = '✅ تم استلام طلبك! رح نتواصل معك خلال 24 ساعة';
                 msg.style.color = 'var(--space-blue)';
                 document.getElementById('orderForm').reset();
-                document.getElementById('fileName').textContent = '';
-                paymentProofFile = null;
                 document.getElementById('paymentSection').classList.remove('show');
             } catch (error) {
                 msg.textContent = '❌ صار خطأ: ' + error.message;
@@ -256,4 +231,4 @@
         loadPackages();
     </script>
 </body>
-</html>
+</html>                     
